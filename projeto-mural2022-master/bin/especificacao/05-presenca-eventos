@@ -1,0 +1,60 @@
+Confirmacao de presenca em eventos
+
+Qualquer usuário do sistema pode confirmar presença em um evento e desconfirmar.
+Assinaturas dos comandos:
+confirmar-presenca <user_name> <id_post>
+desconfirmar-presenca <user_name> <id_post>
+listar-participantes-evento <id_post>
+listar-eventos-confirmados <user_name>
+
+Testes:
+
+> limpar-banco
+ok
+> criar-usuario joao
+ok
+> criar-usuario maria
+ok
+> criar-usuario jose
+ok
+> criar-mural bloco2
+ok
+> usar-mural bloco2
+ok
+> postar-evento joao "Encontro dos Estudantes de Palotina" 08/11/2017 17:00 "Bloco I - UFPR"
+ok
+> postar-anuncio joao "Vendo livro de álgebra"
+ok
+> listar-posts bloco2
+id_2 anuncio joao "Vendo livro de álgebra"
+id_1 evento joao "Encontro dos Estudantes de Palotina" 08/11/2017 17:00 "Bloco I - UFPR"
+> confirmar-presenca maria 1
+ok
+> confirmar-presenca maria 2
+nao-eh-um-evento
+> listar-participantes-evento 1
+maria
+> listar-eventos-confirmados maria
+id_1 evento joao "Encontro dos Estudantes de Palotina" 08/11/2017 17:00 "Bloco I - UFPR"
+> postar-evento joao "Bailão dos Jeca" 09/11/2017 22:00 "Green Club"
+ok
+> listar-posts bloco2
+id_3 evento joao "Bailão dos Jeca" 09/11/2017 22:00 "Green Club"
+id_2 anuncio joao "Vendo livro de álgebra"
+id_1 evento joao "Encontro dos Estudantes de Palotina" 08/11/2017 17:00 "Bloco I - UFPR"
+> confirmar-presenca maria 3
+ok
+> confirmar-presenca joao 3
+ok
+> listar-participantes-evento 3
+joao
+maria
+> listar-eventos-confirmados maria
+id_1 evento joao "Encontro dos Estudantes de Palotina" 08/11/2017 17:00 "Bloco I - UFPR"
+id_3 evento joao "Bailão dos Jeca" 09/11/2017 22:00 "Green Club"
+> desconfirmar-presenca maria 3
+ok
+> desconfirmar-presenca jose 3
+nao-tinha-confirmado
+> listar-eventos-confirmados maria
+id_1 evento joao "Encontro dos Estudantes de Palotina" 08/11/2017 17:00 "Bloco I - UFPR"

@@ -1,0 +1,48 @@
+Salvar posts
+
+Qualquer usuário do sistema pode salvar um post para ver depois.
+Assinaturas dos comandos:
+salvar-post <user_name> <id_post>
+listar-salvos <user_name>
+excluir-salvo <user_name> <id_post>
+
+Testes:
+
+> limpar-banco
+ok
+> criar-usuario joao
+ok
+> criar-usuario maria
+ok
+> criar-mural bloco2
+ok
+> usar-mural bloco2
+ok
+> postar-anuncio joao "Vende-se Livro de Algebra"
+ok
+> listar-posts bloco2
+id_1 anuncio joao "Vende-se Livro de Algebra"
+> salvar-post maria 1
+ok
+> listar-salvos maria
+id_1 anuncio joao "Vende-se Livro de Algebra"
+> excluir-salvo maria 1
+ok
+> listar-salvos maria
+nada-a-mostrar
+> salvar-post maria 2
+post-nao-encontrado
+> excluir-salvo maria 2
+post-nao-encontrado
+> postar-aviso joao "Amanhã não haverá aula de Calculo"
+ok
+> listar-posts bloco2
+id_2 aviso joao "Amanhã não haverá aula de Calculo"
+id_1 anuncio joao "Vende-se Livro de Algebra"
+> salvar-post maria 1
+ok
+> salvar-post maria 2
+ok
+> listar-salvos maria
+id_2 aviso joao "Amanhã não haverá aula de Calculo"
+id_1 anuncio joao "Vende-se Livro de Algebra"
